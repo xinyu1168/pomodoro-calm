@@ -15,13 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Unpack project source
+        run: mkdir app && unzip -q pomodoro-calm-source.zip -d app
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: app/package-lock.json
-      - name: Unpack project source
-        run: mkdir app && unzip -q pomodoro-calm-source.zip -d app
       - name: Install dependencies and build
         working-directory: app
         run: npm ci && npm run build
